@@ -1,0 +1,5 @@
+<div class="row">
+    <div class="col-md-4" *ngFor="let user of users; let i = index">
+        <app-user [user]="user" (deleted)="deleteUser(user.id, i)"></app-user>
+    </div>
+</div>

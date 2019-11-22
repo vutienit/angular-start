@@ -1,0 +1,13 @@
+<div class="col-sm-1">
+    <ul>
+        <li *ngFor="let author of listAuthors">
+            {{ author }}
+        </li>
+    </ul>
+</div>
+
+<button class="btn" [class.btn-primary]="status" (click)=like()>{{likeStatus}}</button>
+<input type="text" [(ngModel)]="count" />
+<br>
+<p><input type="text" [(ngModel)]="textAuthor" /></p>
+<p>{{ textAuthor | titlecase }}</p>

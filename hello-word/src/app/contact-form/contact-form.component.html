@@ -1,0 +1,52 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+  <div ngModelGroup="userInfo" #userInfo="ngModelGroup">
+    <div class="form-group">
+      <label for="firstname">Firstname</label>
+      <input type="text" class="form-control" id="firstname" placeholder="First name" ngModel #firstname="ngModel"
+        name="firstname" (change)="log(firstname)" required minlength="3" />
+      <div class="alert alert-danger mt-2" *ngIf="firstname.touched && firstname.invalid">
+        <div *ngIf="firstname.errors.required">This field is required</div>
+        <div *ngIf="firstname.errors.minlength">Min length is {{ firstname.errors.minlength.requiredLength }}</div>
+        <div *ngIf="firstname.errors.pattern">Invalid pattern</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="comment">Comment</label>
+    <textarea class="form-control" id="comment" rows="3" ngModel #comment="ngModel" name="comment"></textarea>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" ngModel name="checkbox">
+    <label class="form-check-label" for="exampleCheck1">Register to our newletters</label>
+  </div>
+  <div class="form-group" *ngIf="f.value.checkbox">
+    We will not spam your email
+  </div>
+  <div class="input-group mb-3">
+    <select class="custom-select" ngModel name="method">
+      <option selected>Select contact method...</option>
+      <option *ngFor="let method of contactMethods" [ngValue]="method">{{method.name}}</option>
+    </select>
+  </div>
+  <div class="form-group" *ngIf="f.value.method">
+    We will contact your by {{f.value.method.name}}
+  </div>
+  <div class="form-group">
+    What's your gender?
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" ngModel value="male" name="gender">
+    <label class="form-check-label" for="inlineCheckbox1">Male</label>
+  </div>
+  <div class="form-check form-check-inline mb-3">
+    <input class="form-check-input" type="radio" ngModel value="female" name="gender">
+    <label class="form-check-label" for="inlineCheckbox2">Female</label>
+  </div>
+  <div class="form-check form-check-inline mb-3" *ngIf="f.value.gender">
+    <span class="mr-2">You are </span>
+    <span *ngIf="f.value.gender === 'male'"><i class="fas fa-male"></i></span>
+    <span *ngIf="f.value.gender === 'female'"><i class="fas fa-female"></i></span>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit</button>
+</form>

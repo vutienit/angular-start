@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <form #f="ngForm">
+        <div class="form-group">
+            <label for="email">FirstName</label>
+            <input type="text" class="form-control" id="firstname" ngModel #firstname="ngModel" name="firstname"
+                (change)="log(firstname)" required minlength="3" pattern="banana">
+        </div>
+        <div *ngIf="firstname.errors && firstname.invalid" class="alert alert-danger">
+            <div *ngIf="firstname.errors.required">This field is required</div>
+            <div *ngIf="firstname.errors.minlength">Min length is {{firstname.errors.minlength.requiredLength}}</div>
+            <div *ngIf="firstname.errors.pattern">Invalid pattern</div>  
+        </div>      
+        <div class="form-group">
+            <label for="pwd">Comment:</label>
+            <textarea class="form-control" id="comment" ngModel #comment="ngModel" name="comment"></textarea>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" ngModel #checkRemember="ngModel" name="checkRemember">Remember me</label>
+        </div>
+        <div *ngIf="f.value.checkRemember">We will remember you!</div>
+
+        <select class="form-control" ngModel #selectContact="ngModel" name="selectContact">     
+            <option value="" selected>Please select</option>        
+            <option *ngFor="let contact of contactList" value="{{contact.name}}">{{contact.name}}</option>  
+        </select>
+        <div>
+            <label class="radio-inline"><input type="radio" ngModel #optradio="ngModel" name="optradio" value="male">Male</label>
+            <label class="radio-inline"><input type="radio" ngModel #optradio="ngModel" name="optradio" value="female">Female</label>
+        </div>
+        <div></div>
+        <div *ngIf="f.value.optradio">You are : <i [ngClass]="{'fas fa-male' : f.value.optradio == 'male', 'fas fa-female' : f.value.optradio == 'female'}"></i></div>
+        <button type="button" class="btn btn-primary" (click)="submit(f)">Submit</button>
+    </form>
+</div>

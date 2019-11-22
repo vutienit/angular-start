@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+  <div formGroupName="account">
+      <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" placeholder="Enter Username" formControlName="username" />
+          <div class="alert alert-danger mt-2" *ngIf="username.touched && username.invalid">
+            <div *ngIf="username.errors.required">This field is required</div>
+            <div *ngIf="username.errors.minlength">
+              Min length is {{ username.errors.minlength.requiredLength }}
+            </div>
+            <div *ngIf="username.errors.maxlength">
+              Min length is {{ username.errors.maxlength.requiredLength }}
+            </div>
+            <div *ngIf="username.errors.cannotContainSpace">
+              Username cannot contain space
+            </div>
+            <div *ngIf="username.errors.cannotContainDigit">
+              Username cannot contain digit
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="Enter Password" formControlName="password" />
+    <div class="alert alert-danger mt-2" *ngIf="password.touched && password.invalid">
+      <div *ngIf="password.errors.cannotContainSpecialCharacter">
+        Password cannot contain letter ~
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+</form>

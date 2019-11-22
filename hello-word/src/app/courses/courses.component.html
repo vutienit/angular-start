@@ -1,0 +1,30 @@
+<h3>Wanna create a new post</h3>
+
+<form class="text-right" #f="ngForm" (ngSubmit)="submit(f)">
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      id="oldPassword"
+      placeholder="Enter New Post"
+      name="newPost"
+      ngModel
+      #newPost="ngModel"
+      required
+    />
+    <div class="text-left alert alert-danger mt-2" *ngIf="newPost.touched && newPost.invalid">
+      <div *ngIf="newPost.errors.required">Name is required</div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<ng-container *ngIf="courses.length; else elseTemplate">
+  <h3>This is list of courses</h3>
+  <div *ngFor="let course of courses; let i = index">
+    <course [course]="course" (deleted)="deleteCourse(i, $event)"></course>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+  <p>No courses yet</p>
+</ng-template>

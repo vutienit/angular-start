@@ -1,0 +1,16 @@
+<div class="alert alert-info d-flex justify-content-between" role="alert">
+  
+  <a [routerLink]="['course', course.id]">
+    {{ course.title }}
+  </a>
+  <span (click)="deleteCourse()">
+    x
+  </span>
+</div>
+<div class="mb-2 text-right">
+  <button type="button" class="btn btn-secondary mr-3" (click)="rename()">Rename</button>
+  <app-like
+    (likeCountEvent)="checkLikeCountEvent($event)"
+    [likeCount]="course.id"
+  ></app-like>
+</div>

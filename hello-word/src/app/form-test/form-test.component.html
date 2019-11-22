@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <form #f="ngForm">
+        <div class="form-group">
+            <label for="email">Course name</label>
+            <input type="text" class="form-control" id="coursename" ngModel #coursename="ngModel" name="coursename"
+                (change)="log(coursename)" required minlength="5">
+        </div>
+        <div *ngIf="coursename.errors && coursename.invalid && coursename.touched" class="alert alert-danger">
+            <div *ngIf="coursename.errors.required">This field is required</div>
+            <div *ngIf="coursename.errors.minlength">Name should be minimun {{coursename.errors.minlength.requiredLength}} characters</div>
+        </div>      
+        <div class="form-group">
+            <label for="pwd">Category:</label>
+            <select class="form-control" ngModel #selectcategory="ngModel" name="selectcategory" required>     
+                <option value="" selected>-- Please select --</option>        
+                <option *ngFor="let category of categoryList" value="{{category.name}}">{{category.name}}</option>  
+            </select>
+        </div>
+        <div *ngIf="selectcategory.errors && selectcategory.invalid && selectcategory.touched" class="alert alert-danger">
+            <div *ngIf="selectcategory.errors.required">This field is required</div>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" ngModel #checkGuarantee="ngModel" name="checkGuarantee">
+                30 day money back guarantee</label>
+        </div>
+        <div *ngIf="f.value.checkGuarantee">Your money will be guaranted!</div>
+        <button type="button" class="btn btn-primary" (click)="submit(f)">Submit</button>
+    </form>
+</div>
