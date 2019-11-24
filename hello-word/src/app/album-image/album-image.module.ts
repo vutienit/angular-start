@@ -4,12 +4,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AlbumImageComponent } from './album-image.component';
 import { AlbumImageService } from './album-image.service';
+import { ImageComponent } from './image/image.component';
+import { ImageDetailComponent } from './image-detail/image-detail.component';
 
 
 
 @NgModule({
   declarations: [
-    AlbumImageComponent
+    AlbumImageComponent,
+    ImageComponent,
+    ImageDetailComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,9 @@ import { AlbumImageService } from './album-image.service';
     AlbumImageService
   ],
   exports: [
-    AlbumImageComponent
+    AlbumImageComponent,
+    ImageComponent,
+    ImageDetailComponent
   ]
 })
 export class AlbumImageModule { }

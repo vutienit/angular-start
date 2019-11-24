@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumImageService } from './album-image.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-album-image',
@@ -14,29 +15,50 @@ export class AlbumImageComponent implements OnInit {
   constructor(private albumService: AlbumImageService,
     private route: ActivatedRoute,
     private router: Router) { }
-
+  totalPage = 0;
+  totalPageList = [];
   ngOnInit() {
-    this.route.queryParamMap.subscribe(
-      params => {
-        if (params.get('page')) {
-          this.page = Number(params.get('page'));
+    combineLatest(this.route.queryParamMap).subscribe(
+      (combined) => {
+        if (combined[0].get('page')) {
+          this.page = Number(combined[0].get('page'));
         }
-        if (params.get('limit')) {
-          this.limit = Number(params.get('limit'));
+        if (combined[0].get('limit')) {
+          this.limit = Number(combined[0].get('limit'));
         }
+        this.albumService.getList().subscribe(
+          (response: any) => {
+            this.list = response.slice(this.limit * (this.page - 1), this.limit * this.page);
+            this.resizePhotos();
+            console.log(this.list);
+            this.totalPage = Math.ceil(response.length/this.limit);
+            this.totalPageList = Array(this.totalPage).fill(0).map((x,i)=>i);
+          },
+          error => {
+            alert('An unexpected error occurred');
+            console.log(error);
+          }
+        );
       }
     );
+    
 
-    this.albumService.getList().subscribe(
-      (response: any) => {
-        this.list = response.slice(this.limit * (this.page - 1), this.limit * this.page);
-        console.log(this.list);
-      },
-      error => {
-        alert('An unexpected error occurred');
-        console.log(error);
-      }
-    );
   }
-
+  resizePhotos() {
+    for (var i = 0; i <= this.list.length; i++) {
+      if (this.list[i] && this.list[i].download_url) {
+        this.list[i].download_url = this.albumService.resizeById(this.list[i].id);
+        this.list[i].height = 300;
+        this.list[i].width = 500;
+      }
+    }
+  }
+  navigatePage(page : string){
+    this.router.navigate([],{
+      queryParams: {
+        page : page
+      },
+      queryParamsHandling : 'merge'
+    });
+  }
 }

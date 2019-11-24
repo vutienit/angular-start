@@ -15,7 +15,10 @@ export class AlbumImageService {
   getList() {
     return this.http.get(this.url + 'v2/list');
   }
-  getById(id, width, height) {
-    return this.http.get(this.url + 'id/' + id + '/' + width + '/' + height);
+  getImageById(id, height, width) {
+    return this.url + 'id/' + id + '/' + height + '/' + width;
+  }
+  resizeById(id) {
+    return this.url + 'id/' + id + '/300/500';
   }
 }

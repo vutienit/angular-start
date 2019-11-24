@@ -20,6 +20,7 @@ import { AuthorsComponent } from './authors/authors.component';
 import { CoursesComponent } from './courses/courses.component';
 import { AlbumImageComponent } from './album-image/album-image.component';
 import { AlbumImageModule } from './album-image/album-image.module';
+import { ImageDetailComponent } from './album-image/image-detail/image-detail.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AlbumImageModule } from './album-image/album-image.module';
       {path:'name', component : FormNameComponent},
       {path:'reactive', component : FormReactiveComponent},
       {path:'album', component : AlbumImageComponent},
+      {path:'album/image/:id/:height/:width', component : ImageDetailComponent},
       {path:'**', component : NotFoundComponent}
     ])
   ],
