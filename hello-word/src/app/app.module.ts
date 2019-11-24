@@ -18,6 +18,8 @@ import { FormNameComponent } from './form-name/form-name.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { CoursesComponent } from './courses/courses.component';
+import { AlbumImageComponent } from './album-image/album-image.component';
+import { AlbumImageModule } from './album-image/album-image.module';
 
 @NgModule({
   declarations: [
@@ -39,12 +41,14 @@ import { CoursesComponent } from './courses/courses.component';
     ReactiveFormsModule,
     UserListModule,
     NavbarModule,
+    AlbumImageModule,
     RouterModule.forRoot([
       {path:'', component : AuthorsComponent},
       {path:'courses', component : CoursesComponent},
       {path:'courses/course/:id', component : CourseComponent},
       {path:'name', component : FormNameComponent},
       {path:'reactive', component : FormReactiveComponent},
+      {path:'album', component : AlbumImageComponent},
       {path:'**', component : NotFoundComponent}
     ])
   ],

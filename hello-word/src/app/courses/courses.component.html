@@ -28,3 +28,15 @@
 <ng-template #elseTemplate>
   <p>No courses yet</p>
 </ng-template>
+<div class="row">
+  <select class="form-control col-md-2" (change)="navigateSort($event.target.value)">
+    <option value="desc" selected>DESC</option>
+    <option value="asc">ASC</option>
+  </select>
+  <nav class="col-md-6" aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" (click)="navigatePage('1')">1</a></li>
+      <li class="page-item"><a class="page-link" (click)="navigatePage('2')">2</a></li>
+    </ul>
+  </nav>
+</div>

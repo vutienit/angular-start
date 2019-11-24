@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from './courses.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'courses',
@@ -12,14 +12,14 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private courseService: CoursesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
   page = 1;
   limit = 5;
   sort = 'desc';
   ngOnInit() {
-
 
     this.route.queryParamMap.subscribe(
       params => {
@@ -73,6 +73,23 @@ export class CoursesComponent implements OnInit {
         alert('An unexpected error occurred');
         console.log(error);
       });
+  }
+
+  navigatePage(page : string){
+    this.router.navigate(['/courses'],{
+      queryParams: {
+        page : page
+      },
+      queryParamsHandling : 'merge'
+    });
+  }
+  navigateSort(sort : string){
+    this.router.navigate(['/courses'],{
+      queryParams: {
+        sort : sort
+      },
+      queryParamsHandling : 'merge'
+    });
   }
 
   deleteCourse(index, likeCount) {
