@@ -1,0 +1,10 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item" routerLinkActive="active" (click)="navigate('/')" [routerLinkActiveOptions]="{exact:true}">
+            <a class="nav-link">Dashboard</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" (click)="navigate('heroes')" [routerLinkActiveOptions]="{exact:true}">
+            <a class="nav-link">Heroes</a>
+        </li>
+    </ul>
+</nav>
