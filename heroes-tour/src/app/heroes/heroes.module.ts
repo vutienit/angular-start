@@ -37,4 +37,6 @@ import { HeroNameInputComponent } from './hero-name-input/hero-name-input.compon
     HeroNameInputComponent
   ]
 })
-export class HeroesModule { }
+export class HeroesModule { 
+  
+}
