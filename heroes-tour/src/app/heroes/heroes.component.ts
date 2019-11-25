@@ -27,11 +27,31 @@ export class HeroesComponent implements OnInit {
   heroes : Hero[] = null;
 
   ngOnInit() {
-    this.heroService.getHeroes().subscribe(
+    this.heroService.getHeroes('desc').subscribe(
       res => {
         this.heroes = res;
+        console.log(this.heroes);
       }
     );
+  }
+
+  createHero(){
+    if(this.form.valid){
+      const likeCount = Math.round(Math.random() * 100);
+      const id = this.heroes[0].id + 1;
+        this.heroService.createHero(this.form.value.newPost, likeCount, id).subscribe(
+          (response: any) => {
+            if(response){
+              this.form.reset();
+            }else{
+              alert('Create Hero Unsuccessful')
+            }
+          },
+          error => {
+            console.log(error);
+            alert('Create Hero Unsuccessful')
+          });
+    }
   }
 
 }

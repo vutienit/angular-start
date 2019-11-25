@@ -1,11 +1,17 @@
-<div class="alert alert-info d-flex justify-content-between" role="alert">
-    <div class="col-md-2">
-        {{hero.id}}
+<div class="row">
+    <div class="col-md-8">
+        <div class="alert alert-info d-flex justify-content-between" role="alert">
+            <div class="col-md-1">
+                {{hero.id}}
+            </div>
+            <div class="col-md-7">
+                <a>
+                    {{hero.name}}
+                </a>
+            </div>
+            <span (click)="deleteHero()">
+                x
+            </span>
+        </div>
     </div>
-    <a>
-        {{hero.name}}
-    </a>
-    <span (click)="deleteHero()">
-        x
-    </span>
 </div>

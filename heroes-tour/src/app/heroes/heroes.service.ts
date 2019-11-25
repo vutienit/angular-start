@@ -21,7 +21,38 @@ export class HeroesService {
   ]
   constructor() { }
 ​
-  getHeroes(): Observable<Hero[]> {
+  getHeroes(sort): Observable<Hero[]> {
+    if(sort){
+      if (sort == 'asc') {
+        this.heroes.sort(function (a, b) {
+          // so sánh 2 giá trị title liền kề nhau để sắp xếp phần tử
+          // Dùng toUpperCase() để không phân biệt ký tự hoa thường
+          const genreA = a.id;
+          const genreB = b.id;
+
+          let comparison = 0;
+          if (genreA > genreB) {
+            comparison = 1;
+          } else if (genreA < genreB) {
+            comparison = -1;
+          }
+          return comparison;
+        });
+      } else {
+        this.heroes.sort(function (a, b) {
+          const genreA = a.id;
+          const genreB = b.id;
+
+          let comparison = 0;
+          if (genreA > genreB) {
+            comparison = -1;
+          } else if (genreA < genreB) {
+            comparison = 1;
+          }
+          return comparison;
+        });
+      }
+    }
     return of(this.heroes)
   }
 ​
@@ -36,7 +67,12 @@ export class HeroesService {
     return of(hero)
   }
 ​
-  createHero(newName): Observable<boolean> {
+  createHero(newName, likeCount, id): Observable<boolean> {
+    this.heroes.unshift({
+      id: id,
+      name: newName,
+      likeCount: likeCount
+    })
     return of(true)
   }
 ​

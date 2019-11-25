@@ -1,20 +1,24 @@
-<h3>New hero</h3>
-<form class="text-right" [formGroup]="form">
-    <div class="form-group">
-        <input type="text" class="form-control" formControlName="newPost" placeholder="Enter new hero name">
-        <div class="text-left mt-2" *ngIf="newPost.touched && newPost.invalid">
-            <div *ngIf="newPost.errors && newPost.touched" class="alert alert-danger">
-                <div *ngIf="newPost.errors.required">This field is required</div>
+<div class="row">
+    <div class="col-md-8">
+        <h3>New hero</h3>
+        <form class="text-right" [formGroup]="form">
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="newPost" placeholder="Enter new hero name">
+                <div class="text-left mt-2" *ngIf="newPost.touched && newPost.invalid">
+                    <div *ngIf="newPost.errors && newPost.touched" class="alert alert-danger">
+                        <div *ngIf="newPost.errors.required">This field is required</div>
+                    </div>
+                </div>
             </div>
-        </div>
+            <button [disabled]="form.status=='INVALID'" type="submit" class="btn btn-primary" (click)="createHero()">Create</button>
+        </form>
+        <ng-container *ngIf="heroes.length; else elseTemplate">
+            <div *ngFor="let hero of heroes; let i = index">
+                <app-hero [hero]="hero"></app-hero>
+            </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <p>No heroes yet</p>
+        </ng-template>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
-<ng-container *ngIf="heroes.length; else elseTemplate">
-    <div *ngFor="let hero of heroes; let i = index">
-        <app-hero [hero]="hero"></app-hero>
-    </div>
-</ng-container>
-<ng-template #elseTemplate>
-    <p>No heroes yet</p>
-</ng-template>
+</div>
