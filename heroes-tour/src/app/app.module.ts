@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { HeroesComponent } from './heroes/heroes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HeroDetailComponent } from './heroes/hero-detail/hero-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     RouterModule.forRoot([
       {path:'', component : DashboardComponent},
       {path:'heroes', component : HeroesComponent},
+      {path:'heroes/hero/:id', component : HeroDetailComponent},
       {path:'**', component : NotFoundComponent}
     ])
   ],

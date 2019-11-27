@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { HeroesService } from '../heroes.service';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-hero',
@@ -7,9 +9,22 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeroComponent implements OnInit {
   @Input() hero;
-  constructor() { }
+  @Output() deleted = new EventEmitter();
+  
+  constructor(private heroService: HeroesService) { }
 
   ngOnInit() {
   }
 
+  deleteHero() {
+    this.heroService.deleteHero(this.hero.id).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+    this.deleted.emit(this.hero.id);
+  }
 }

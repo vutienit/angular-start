@@ -77,7 +77,14 @@ export class HeroesService {
   }
 ​
   deleteHero(heroID): Observable<boolean> {
-    return of(true)
+    const index = this.heroes.findIndex(element => element.id === heroID);
+    if(index >= 0){
+      this.heroes.splice(index, 1);
+      return of(true);
+    }else{
+      return of(false);
+    }
+    
   }
 ​
 }

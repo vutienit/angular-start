@@ -54,4 +54,8 @@ export class HeroesComponent implements OnInit {
     }
   }
 
+  deleteHero(index, likeCount) {
+    //this.heroes.splice(index, 1);
+  }
+
 }
