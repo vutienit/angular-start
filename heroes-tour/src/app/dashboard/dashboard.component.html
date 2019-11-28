@@ -1,1 +1,54 @@
-<p>dashboard works!</p>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Top heroes today</h1>
+</div>
+
+<div class="row">
+    <ng-container *ngIf="heroesTop.length; else elseTemplate">
+        <div class="col-xl-3 col-md-6 mb-4" *ngFor="let hero of heroesTop; let i = index">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    <a [routerLink]="['heroes/hero', hero.id]">{{hero.name}}</a>
+                            </div>
+                            <div class="mb-0 font-weight-bold text-gray-800">Like : {{hero.likeCount}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <p>No heroes yet</p>
+    </ng-template>   
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form #f="ngForm" class="form-inline md-form mr-auto mb-4 form-group has-search">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" class="form-control col-md-6" placeholder="Search" ngModel #inputSearch="ngModel" name="inputSearch">
+            &nbsp;
+            <button class="btn btn-primary" type="submit" (click)="search(f)">Search</button>
+        </form>
+    </div>
+</div>
+
+<ng-container *ngIf="heroesSearch && heroesSearch.length; else elseSearchTemplate">
+    <div class="row" *ngFor="let hero of heroesSearch; let i = index">
+        <div class="col-md-6">
+            <div class="alert alert-primary alert-dismissible">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a [routerLink]="['heroes/hero', hero.id]">{{hero.name}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</ng-container>
+<div>{{searchMessage}}</div>
+<ng-template #elseSearchTemplate>
+    
+</ng-template>  
+

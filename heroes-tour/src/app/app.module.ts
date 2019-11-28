@@ -9,17 +9,18 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeroDetailComponent } from './heroes/hero-detail/hero-detail.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    DashboardComponent,
     NavbarComponent
   ],
   imports: [
     BrowserModule,
     HeroesModule,
+    DashboardModule,
     RouterModule.forRoot([
       {path:'', component : DashboardComponent},
       {path:'heroes', component : HeroesComponent},
