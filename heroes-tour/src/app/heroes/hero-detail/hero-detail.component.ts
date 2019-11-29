@@ -72,4 +72,8 @@ export class HeroDetailComponent implements OnInit {
     }
   }
 
+  back(){
+    console.log("back");
+    window.history.back();
+  }
 }
