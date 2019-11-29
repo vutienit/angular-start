@@ -35,8 +35,8 @@
   </select>
   <nav class="col-md-6" aria-label="Page navigation example">
     <ul class="pagination">
-      <li class="page-item"><a class="page-link" (click)="navigatePage('1')">1</a></li>
-      <li class="page-item"><a class="page-link" (click)="navigatePage('2')">2</a></li>
+      <li class="page-item" routerLinkActive="active"><a class="page-link" routerLink="" [queryParams]="{page: 1}" queryParamsHandling="merge" (click)="navigatePage('1')">1</a></li>
+      <li class="page-item" routerLinkActive="active"><a class="page-link" routerLink="" [queryParams]="{page: 2}" queryParamsHandling="merge" (click)="navigatePage('2')">2</a></li>
     </ul>
   </nav>
 </div>

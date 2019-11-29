@@ -12,7 +12,9 @@
 </div>
 <nav class="col-md-6" aria-label="Page navigation example">
     <ul class="pagination">
-        <li class="page-item" routerLinkActive="active" (click)="navigatePage(page+1)" *ngFor="let page of totalPageList; let i = index">
+        <li class="page-item" routerLinkActive="active" routerLink="" [queryParams]="{page: page+1}" 
+            queryParamsHandling="merge" (click)="navigatePage(page+1)" 
+            *ngFor="let page of totalPageList; let i = index">
             <a class="page-link">{{page+1}}</a>
         </li>
     </ul>

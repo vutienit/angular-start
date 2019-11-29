@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from './courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'courses',
@@ -20,59 +21,60 @@ export class CoursesComponent implements OnInit {
   limit = 5;
   sort = 'desc';
   ngOnInit() {
-
-    this.route.queryParamMap.subscribe(
-      params => {
-        if (params.get('page')) {
-          this.page = Number(params.get('page'));
+    combineLatest(this.route.queryParamMap).subscribe(
+      (combined) => {
+        if (combined[0].get('page')) {
+          this.page = Number(combined[0].get('page'));
         }
-        if (params.get('limit')) {
-          this.limit = Number(params.get('limit'));
+        if (combined[0].get('limit')) {
+          this.limit = Number(combined[0].get('limit'));
         }
-        if (params.get('sort')) {
-          this.sort = params.get('sort');
+        if (combined[0].get('sort')) {
+          this.sort = combined[0].get('sort');
         }
+        this.courseService.getCourses().subscribe(
+          (response: any) => {
+            if (this.sort == 'asc') {
+              response.sort(function (a, b) {
+                // so sánh 2 giá trị title liền kề nhau để sắp xếp phần tử
+                // Dùng toUpperCase() để không phân biệt ký tự hoa thường
+                const genreA = a.title.toUpperCase();
+                const genreB = b.title.toUpperCase();
+    
+                let comparison = 0;
+                if (genreA > genreB) {
+                  comparison = 1;
+                } else if (genreA < genreB) {
+                  comparison = -1;
+                }
+                return comparison;
+              });
+            } else {
+              response.sort(function (a, b) {
+                const genreA = a.title.toUpperCase();
+                const genreB = b.title.toUpperCase();
+    
+                let comparison = 0;
+                if (genreA > genreB) {
+                  comparison = -1;
+                } else if (genreA < genreB) {
+                  comparison = 1;
+                }
+                return comparison;
+              });
+            }
+            this.courses = response.slice(this.limit * (this.page - 1), this.limit * this.page);
+            console.log(this.courses);
+          },
+          error => {
+            alert('An unexpected error occurred');
+            console.log(error);
+          });
       }
     );
+    
 
-    this.courseService.getCourses().subscribe(
-      (response: any) => {
-        if (this.sort == 'asc') {
-          response.sort(function (a, b) {
-            // so sánh 2 giá trị title liền kề nhau để sắp xếp phần tử
-            // Dùng toUpperCase() để không phân biệt ký tự hoa thường
-            const genreA = a.title.toUpperCase();
-            const genreB = b.title.toUpperCase();
-
-            let comparison = 0;
-            if (genreA > genreB) {
-              comparison = 1;
-            } else if (genreA < genreB) {
-              comparison = -1;
-            }
-            return comparison;
-          });
-        } else {
-          response.sort(function (a, b) {
-            const genreA = a.title.toUpperCase();
-            const genreB = b.title.toUpperCase();
-
-            let comparison = 0;
-            if (genreA > genreB) {
-              comparison = -1;
-            } else if (genreA < genreB) {
-              comparison = 1;
-            }
-            return comparison;
-          });
-        }
-        this.courses = response.slice(this.limit * (this.page - 1), this.limit * this.page);
-        console.log(this.courses);
-      },
-      error => {
-        alert('An unexpected error occurred');
-        console.log(error);
-      });
+    
   }
 
   navigatePage(page : string){
