@@ -5,3 +5,10 @@
 .hidden{
     display: none !important;
 }
+.margin-center{
+    margin: 0 auto;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    float: none;
+}

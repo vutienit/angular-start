@@ -10,7 +10,20 @@
         </ng-template>
     </div>
 </div>
-<nav class="col-md-6" aria-label="Page navigation example">
+<div class="row" *ngIf="loading">
+    <div class="margin-center">
+        <div class="spinner-grow text-muted"></div>
+        <div class="spinner-grow text-primary"></div>
+        <div class="spinner-grow text-success"></div>
+        <div class="spinner-grow text-info"></div>
+        <div class="spinner-grow text-warning"></div>
+        <div class="spinner-grow text-danger"></div>
+        <div class="spinner-grow text-secondary"></div>
+        <div class="spinner-grow text-dark"></div>
+        <div class="spinner-grow text-light"></div>
+    </div>
+</div>
+<nav class="col-md-6 margin-center" aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item" [ngClass]="{'hidden': activePage <= 1}"
             (click)="navigatePage(activePage-1)">

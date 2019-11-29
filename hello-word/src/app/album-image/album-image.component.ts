@@ -18,9 +18,11 @@ export class AlbumImageComponent implements OnInit {
   totalPage = 0;
   totalPageList = [];
   activePage = 1;
+  loading = true;
   ngOnInit() {
     combineLatest(this.route.queryParamMap).subscribe(
       (combined) => {
+        this.loading = true;
         if (combined[0].get('page')) {
           this.activePage = this.page = Number(combined[0].get('page'));
         }
@@ -29,9 +31,10 @@ export class AlbumImageComponent implements OnInit {
         }
         this.albumService.getList().subscribe(
           (response: any) => {
+            this.loading = false;
             this.list = response.slice(this.limit * (this.page - 1), this.limit * this.page);
             this.resizePhotos();
-            console.log(this.list);
+            // console.log(this.list);
             this.totalPage = Math.ceil(response.length/this.limit);
             this.totalPageList = Array(this.totalPage).fill(0).map((x,i)=>i);
           },
