@@ -17,11 +17,12 @@ export class AlbumImageComponent implements OnInit {
     private router: Router) { }
   totalPage = 0;
   totalPageList = [];
+  activePage = 1;
   ngOnInit() {
     combineLatest(this.route.queryParamMap).subscribe(
       (combined) => {
         if (combined[0].get('page')) {
-          this.page = Number(combined[0].get('page'));
+          this.activePage = this.page = Number(combined[0].get('page'));
         }
         if (combined[0].get('limit')) {
           this.limit = Number(combined[0].get('limit'));
