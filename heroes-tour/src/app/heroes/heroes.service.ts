@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {Hero} from './hero.interface';
+import { Observable, of } from 'rxjs';
+import { Hero } from './hero.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +18,13 @@ export class HeroesService {
     { id: 9, name: 'Magma', likeCount: Math.round(Math.random() * 100) },
     { id: 10, name: 'Tornado', likeCount: Math.round(Math.random() * 100) },
     { id: 11, name: 'Narco Bam', likeCount: Math.round(Math.random() * 100) }
-  ]
+  ];
   constructor() { }
-​
+
   getHeroes(sort): Observable<Hero[]> {
-    if(sort){
-      if (sort == 'asc') {
-        this.heroes.sort(function (a, b) {
+    if (sort) {
+      if (sort === 'asc') {
+        this.heroes.sort(function(a, b) {
           // so sánh 2 giá trị title liền kề nhau để sắp xếp phần tử
           // Dùng toUpperCase() để không phân biệt ký tự hoa thường
           const genreA = a.id;
@@ -39,7 +39,7 @@ export class HeroesService {
           return comparison;
         });
       } else {
-        this.heroes.sort(function (a, b) {
+        this.heroes.sort(function(a, b) {
           const genreA = a.id;
           const genreB = b.id;
 
@@ -53,38 +53,38 @@ export class HeroesService {
         });
       }
     }
-    return of(this.heroes)
+    return of(this.heroes);
   }
-​
+
   getHeroByID(heroID): Observable<Hero> {
-    const hero = this.heroes.find(element => element.id == heroID)
+    const hero = this.heroes.find(element => element.id === heroID);
     return of(hero)
   }
-​
+
   updateHeroByID(heroID, newName): Observable<Hero> {
-    let hero = this.heroes.find(element => element.id == heroID)
+    const hero = this.heroes.find(element => element.id === heroID);
     hero.name = newName;
     return of(hero)
   }
-​
-  createHero(newName, likeCount, id): Observable<boolean> {
+
+  createHero(newName, newLikeCount, newId): Observable<boolean> {
     this.heroes.unshift({
-      id: id,
+      id: newId,
       name: newName,
-      likeCount: likeCount
+      likeCount: newLikeCount
     })
-    return of(true)
+    return of(true);
   }
-​
+
   deleteHero(heroID): Observable<boolean> {
     const index = this.heroes.findIndex(element => element.id === heroID);
-    if(index >= 0){
+    if (index >= 0) {
       this.heroes.splice(index, 1);
       return of(true);
-    }else{
+    } else {
       return of(false);
     }
-    
+
   }
-​
+
 }

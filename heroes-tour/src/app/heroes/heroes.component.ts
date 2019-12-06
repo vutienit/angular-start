@@ -21,10 +21,10 @@ export class HeroesComponent implements OnInit {
       ]]
     });
   }
-  get newPost(){
+  get newPost() {
     return this.form.get('newPost');
   }
-  heroes : Hero[] = null;
+  heroes: Hero[] = null;
 
   ngOnInit() {
     this.heroService.getHeroes('desc').subscribe(
@@ -35,27 +35,27 @@ export class HeroesComponent implements OnInit {
     );
   }
 
-  createHero(){
-    if(this.form.valid){
+  createHero() {
+    if (this.form.valid) {
       const likeCount = Math.round(Math.random() * 100);
       const id = this.heroes[0].id + 1;
-        this.heroService.createHero(this.form.value.newPost, likeCount, id).subscribe(
-          (response: any) => {
-            if(response){
-              this.form.reset();
-            }else{
-              alert('Create Hero Unsuccessful')
-            }
-          },
-          error => {
-            console.log(error);
-            alert('Create Hero Unsuccessful')
-          });
+      this.heroService.createHero(this.form.value.newPost, likeCount, id).subscribe(
+        (response: any) => {
+          if (response) {
+            this.form.reset();
+          } else {
+            alert('Create Hero Unsuccessful');
+          }
+        },
+        error => {
+          console.log(error);
+          alert('Create Hero Unsuccessful');
+        });
     }
   }
 
   deleteHero(index, likeCount) {
-    //this.heroes.splice(index, 1);
+    // this.heroes.splice(index, 1);
   }
 
 }

@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
     this.heroService.getHeroes(null).subscribe(
       (response: any) => {
         this.heroes = response;
-        response.sort(function (a, b) {
+        response.sort(function(a, b) {
           // so sánh 2 giá trị title liền kề nhau để sắp xếp phần tử
           // Dùng toUpperCase() để không phân biệt ký tự hoa thường
           const genreA = a.likeCount;
@@ -43,16 +43,16 @@ export class DashboardComponent implements OnInit {
   }
   search(f) {
     if (f.form.value.inputSearch) {
-      let term = f.form.value.inputSearch;
-      this.heroesSearch = this.heroes.filter(function (tag) {        
+      const term = f.form.value.inputSearch;
+      this.heroesSearch = this.heroes.filter(function(tag) {
         return tag.name.toUpperCase().indexOf(term.toUpperCase()) >= 0;
       });
-    }else{
+    } else {
       this.heroesSearch = null;
     }
-    if(this.heroesSearch == null || this.heroesSearch.length == 0){
+    if (this.heroesSearch === null || this.heroesSearch.length === 0) {
       this.searchMessage = 'Nothing found!';
-    }else{
+    } else {
       this.searchMessage = null;
     }
   }

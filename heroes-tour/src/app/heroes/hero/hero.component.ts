@@ -9,8 +9,7 @@ import { EventEmitter } from 'events';
 })
 export class HeroComponent implements OnInit {
   @Input() hero;
-  @Output() deleted = new EventEmitter();
-  
+  @Output() deleted = new EventEmitter();  
   constructor(private heroService: HeroesService) { }
 
   ngOnInit() {
@@ -24,7 +23,7 @@ export class HeroComponent implements OnInit {
       error => {
         console.log(error);
       }
-    )
+    );
     this.deleted.emit(this.hero.id);
   }
 }

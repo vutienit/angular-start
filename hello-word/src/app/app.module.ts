@@ -21,6 +21,11 @@ import { CoursesComponent } from './courses/courses.component';
 import { AlbumImageComponent } from './album-image/album-image.component';
 import { AlbumImageModule } from './album-image/album-image.module';
 import { ImageDetailComponent } from './album-image/image-detail/image-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -43,6 +48,11 @@ import { ImageDetailComponent } from './album-image/image-detail/image-detail.co
     UserListModule,
     NavbarModule,
     AlbumImageModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatInputModule,
     RouterModule.forRoot([
       {path:'', component : AuthorsComponent},
       {path:'courses', component : CoursesComponent},

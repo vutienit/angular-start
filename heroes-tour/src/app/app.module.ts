@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeroDetailComponent } from './heroes/hero-detail/hero-detail.component';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,11 +23,12 @@ import { DashboardModule } from './dashboard/dashboard.module';
     HeroesModule,
     DashboardModule,
     RouterModule.forRoot([
-      {path:'', component : DashboardComponent},
-      {path:'heroes', component : HeroesComponent},
-      {path:'heroes/hero/:id', component : HeroDetailComponent},
-      {path:'**', component : NotFoundComponent}
-    ])
+      { path: '', component: DashboardComponent },
+      { path: 'heroes', component: HeroesComponent },
+      { path: 'heroes/hero/:id', component: HeroDetailComponent },
+      { path: '**', component: NotFoundComponent }
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
