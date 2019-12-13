@@ -8,6 +8,7 @@ import { CourseComponent } from './course/course.component';
 import { LikeModule } from '../like/like.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     LikeModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatDialogModule
   ],
   providers: [
     CoursesService

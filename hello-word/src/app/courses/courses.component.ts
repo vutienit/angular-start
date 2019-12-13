@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CoursesService } from './courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
+declare var $ : any;
 
 @Component({
   selector: 'courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })
+
 export class CoursesComponent implements OnInit {
   courses = [];
 
@@ -114,6 +116,10 @@ export class CoursesComponent implements OnInit {
           alert('Create Post Unsuccessful')
         });
     }
+  }
+  
+  showModal () {
+    $('#myInput').trigger('focus')
   }
 
 }

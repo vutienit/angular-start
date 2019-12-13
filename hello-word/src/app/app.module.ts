@@ -9,7 +9,7 @@ import { LikeModule } from './like/like.module';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { LoginComponent } from './login/login.component';
 import { NewPasswordComponent } from './new-password/new-password.component';
-import { UserListModule } from './user-list/user-list.module';
+
 import { NavbarModule } from './navbar/navbar.module';
 import { RouterModule } from '@angular/router';
 import { CourseComponent } from './courses/course/course.component';
@@ -26,6 +26,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { UserCardModule } from './user-card/user-card.module';
+import { UserCardComponent } from './user-card/user-card.component';
+import { UserDialogComponent } from './shared/dialog/user-dialog/user-dialog.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,7 @@ import { MatInputModule } from '@angular/material/input';
     CoursesModule,
     LikeModule,
     ReactiveFormsModule,
-    UserListModule,
+    UserCardModule,
     NavbarModule,
     AlbumImageModule,
     BrowserAnimationsModule,
@@ -53,11 +57,12 @@ import { MatInputModule } from '@angular/material/input';
     MatRadioModule,
     MatSelectModule,
     MatInputModule,
+    SharedModule,
     RouterModule.forRoot([
       {path:'', component : AuthorsComponent},
       {path:'courses', component : CoursesComponent},
       {path:'courses/course/:id', component : CourseComponent},
-      {path:'name', component : FormNameComponent},
+      {path:'name', component : UserCardComponent},
       {path:'reactive', component : FormReactiveComponent},
       {path:'album', component : AlbumImageComponent},
       {path:'album/image/:id/:height/:width', component : ImageDetailComponent},

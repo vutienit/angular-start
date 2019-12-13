@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>Enter New User Information</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+        <div class="modal-body">
+            <div formGroupName="account">
+                <div class="form-group">                  
+                    <mat-form-field>
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Enter Username" formControlName="username">
+                    </mat-form-field>
+
+                    <mat-error *ngIf="username.touched && username.invalid">
+                        <mat-error *ngIf="username.errors.required">This field is required</mat-error>
+                        <mat-error *ngIf="username.errors.minlength">
+                            Min length is {{ username.errors.minlength.requiredLength }}
+                        </mat-error>
+                        <mat-error *ngIf="username.errors.maxlength">
+                            Max length is {{ username.errors.maxlength.requiredLength }}
+                        </mat-error>
+                        <mat-error *ngIf="username.errors.cannotContainDigit">
+                            Username cannot contain digit
+                        </mat-error>
+                    </mat-error>
+                </div>
+            </div>
+            <div class="form-group">               
+                <mat-form-field>
+                    <mat-label>Company</mat-label>
+                    <input matInput placeholder="Enter Company" formControlName="company">
+                </mat-form-field>
+                <mat-error *ngIf="company.touched && company.invalid">
+                    Company is required
+                </mat-error>
+            </div>
+            <div class="form-group">        
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Enter email" formControlName="email">
+                </mat-form-field>
+                <mat-error *ngIf="email.touched && email.invalid">
+                    Email is required
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Birthdate</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="birthdate" placeholder="Choose a date" disabled>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false"></mat-datepicker> <!-- touchUi element use for touch screen -->
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer" mat-dialog-actions>
+    <button class="btn btn-secondary" (click)="onNoClick()">Close</button>
+    <button class="btn btn-primary" (click)="create()" [disabled]="form.invalid" cdkFocusInitial>Save changes</button>
+</div>
