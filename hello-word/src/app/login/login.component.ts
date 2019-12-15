@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { CustomFormValidators } from './../custom/password.validators';
 import { AuthServiceService } from './auth-service.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { timer } from 'rxjs';
 
 @Component({
@@ -15,7 +15,8 @@ export class LoginComponent {
 
   constructor(fb: FormBuilder,
     private authService : AuthServiceService,
-    private router : Router) {
+    private router : Router,
+    private route : ActivatedRoute) {
     this.form = fb.group({
       account: fb.group({
         username: ['', [
@@ -43,10 +44,11 @@ export class LoginComponent {
       (response: any) => {
         this.successMessage = response.message;
         localStorage.setItem('token', response.token);
+        let returnUrl = this.route.snapshot.queryParams['returnUrl'];
         const source = timer(1000);
         source.subscribe(
           val => {
-            this.router.navigate([''],{
+            this.router.navigate([returnUrl || ''],{
               queryParams: {
                 
               },

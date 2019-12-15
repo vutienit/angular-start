@@ -32,6 +32,10 @@ import { UserDialogComponent } from './shared/dialog/user-dialog/user-dialog.com
 import { SharedModule } from './shared/shared.module';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LoginModule } from './login/login.module';
+import { AuthGuardService } from './shared/service/auth-guard.service';
+import { AdminComponent } from './admin/admin.component';
+import { NoAccessComponent } from './no-access/no-access.component';
+import { AdminAuthGuardService } from './shared/service/admin-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,9 @@ import { LoginModule } from './login/login.module';
     FormNameComponent,
     FormReactiveComponent,
     AuthorsComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    AdminComponent,
+    NoAccessComponent
   ],
   imports: [
     BrowserModule,
@@ -62,17 +68,20 @@ import { LoginModule } from './login/login.module';
     SharedModule,
     LoginModule,
     RouterModule.forRoot([
-      {path:'', component : AuthorsComponent},
+      {path:'', component : AuthorsComponent, canActivate : [AuthGuardService]},
+      {path:'admin', component : AdminComponent, canActivate : [AdminAuthGuardService]},
       {path:'login', component : LoginComponent},
-      {path:'courses', component : CoursesComponent},
-      {path:'courses/course/:id', component : CourseComponent},
-      {path:'name', component : UserCardComponent},
-      {path:'reactive', component : FormReactiveComponent},
-      {path:'album', component : AlbumImageComponent},
-      {path:'album/image/:id/:height/:width', component : ImageDetailComponent},
+      {path:'courses', component : CoursesComponent, canActivate : [AuthGuardService]},
+      {path:'courses/course/:id', component : CourseComponent, canActivate : [AuthGuardService]},
+      {path:'name', component : UserCardComponent, canActivate : [AuthGuardService]},
+      {path:'reactive', component : FormReactiveComponent, canActivate : [AuthGuardService]},
+      {path:'album', component : AlbumImageComponent, canActivate : [AuthGuardService]},
+      {path:'album/image/:id/:height/:width', component : ImageDetailComponent, canActivate : [AuthGuardService]},
+      {path:'no-access', component : NoAccessComponent},
       {path:'**', component : NotFoundComponent}
     ])
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers : [AuthGuardService, AdminAuthGuardService]
 })
 export class AppModule { }
