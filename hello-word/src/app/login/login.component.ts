@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { CustomFormValidators } from './../custom/password.validators';
+import { AuthServiceService } from './auth-service.service';
+import { Router } from '@angular/router';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,9 @@ import { CustomFormValidators } from './../custom/password.validators';
 export class LoginComponent {
   form: FormGroup;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder,
+    private authService : AuthServiceService,
+    private router : Router) {
     this.form = fb.group({
       account: fb.group({
         username: ['', [
@@ -28,9 +33,35 @@ export class LoginComponent {
       ]]
     })
   }
-
-  submit() {
-    console.log(this.form);
+  error : any;
+  successMessage : any;
+  login() {
+    this.error = null;
+    this.successMessage = null;
+    const body = {username : this.username.value, password : this.form.value.password};
+    this.authService.login(body).subscribe(
+      (response: any) => {
+        this.successMessage = response.message;
+        localStorage.setItem('token', response.token);
+        const source = timer(1000);
+        source.subscribe(
+          val => {
+            this.router.navigate([''],{
+              queryParams: {
+                
+              },
+              queryParamsHandling : ''
+            });
+          });
+        console.log(response);
+      },
+      error => {
+        this.error = error;
+        console.log(error);
+        const source = timer(1000);
+        const subscribe = source.subscribe(val => console.log(val));
+      }
+    );
   }
 
   get username() {

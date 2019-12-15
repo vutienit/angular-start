@@ -30,18 +30,20 @@ import { UserCardModule } from './user-card/user-card.module';
 import { UserCardComponent } from './user-card/user-card.component';
 import { UserDialogComponent } from './shared/dialog/user-dialog/user-dialog.component';
 import { SharedModule } from './shared/shared.module';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SummaryPipe,
     ContactFormComponent,
-    LoginComponent,
     NewPasswordComponent,
     NotFoundComponent,
     FormNameComponent,
     FormReactiveComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +60,10 @@ import { SharedModule } from './shared/shared.module';
     MatSelectModule,
     MatInputModule,
     SharedModule,
+    LoginModule,
     RouterModule.forRoot([
       {path:'', component : AuthorsComponent},
+      {path:'login', component : LoginComponent},
       {path:'courses', component : CoursesComponent},
       {path:'courses/course/:id', component : CourseComponent},
       {path:'name', component : UserCardComponent},

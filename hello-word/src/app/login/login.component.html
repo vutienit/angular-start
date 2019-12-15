@@ -1,3 +1,9 @@
+<div *ngIf="error" class="alert alert-danger">
+  {{error.message}}
+</div>
+<div *ngIf="successMessage" class="alert alert-success">
+  {{successMessage}}
+</div>
 <form [formGroup]="form">
   <div formGroupName="account">
       <div class="form-group">
@@ -29,5 +35,5 @@
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+  <button type="submit" class="btn btn-primary" (click)="login()">Submit</button>
 </form>
